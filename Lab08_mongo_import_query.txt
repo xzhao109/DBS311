@@ -1,0 +1,102 @@
+mongoimport --db inventory --collection products --file ~/VSCode109/DBS311/Labs/dataset/products.json
+
+
+mongo
+show dbs
+use inventory
+db.products.find().forEach(printjson)
+exit
+
+
+
+
+db.products.find({}, {name : 1, price : 1, _id : 0})
+
+{ "name" : "AC7 Phone", "price" : 320 }
+{ "name" : "AC3 Case Green", "price" : 12 }
+{ "name" : "Phone Extended Warranty", "price" : 38 }
+{ "name" : "AC3 Phone", "price" : 200 }
+{ "name" : "AC3 Series Charger", "price" : 19 }
+{ "name" : "AC3 Case Red", "price" : 12 }
+{ "name" : "AC3 Case Black", "price" : 12.5 }
+{ "name" : "Phone Service Core Plan" }
+{ "name" : "Phone Service Family Plan" }
+{ "name" : "Phone Service Basic Plan" }
+{ "name" : "Cable TV Basic Service Package" }
+
+
+
+db.products.find({type: 'accessory'}, {name: 1, price: 1, _id : 0})
+
+{ "name" : "AC3 Case Green", "price" : 12 }
+{ "name" : "AC3 Series Charger", "price" : 19 }
+{ "name" : "AC3 Case Red", "price" : 12 }
+{ "name" : "AC3 Case Black", "price" : 12.5 }
+
+
+
+db.products.find({price : {$gte : 12, $lte : 20}}, {name: 1, price: 1, _id : 0})
+
+{ "name" : "AC3 Case Green", "price" : 12 }
+{ "name" : "AC3 Series Charger", "price" : 19 }
+{ "name" : "AC3 Case Red", "price" : 12 }
+{ "name" : "AC3 Case Black", "price" : 12.5 }
+
+
+
+db.products.find({type: {$ne : 'accessory'}}, {name: 1, price: 1})
+
+{ "_id" : "ac7", "name" : "AC7 Phone", "price" : 320 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfb"), "name" : "Phone Extended Warranty", "price" : 38 }
+{ "_id" : "ac3", "name" : "AC3 Phone", "price" : 200 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bff"), "name" : "Phone Service Core Plan" }
+{ "_id" : ObjectId("507d95d5719dbef170f15c00"), "name" : "Phone Service Family Plan" }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfe"), "name" : "Phone Service Basic Plan" }
+{ "_id" : ObjectId("507d95d5719dbef170f15c01"), "name" : "Cable TV Basic Service Package" }
+
+
+
+db.products.find({type: {$in : ['accessory', 'service']}}, {name: 1, price: 1})
+
+{ "_id" : ObjectId("507d95d5719dbef170f15bfa"), "name" : "AC3 Case Green", "price" : 12 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bf9"), "name" : "AC3 Series Charger", "price" : 19 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfd"), "name" : "AC3 Case Red", "price" : 12 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfc"), "name" : "AC3 Case Black", "price" : 12.5 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bff"), "name" : "Phone Service Core Plan" }
+{ "_id" : ObjectId("507d95d5719dbef170f15c00"), "name" : "Phone Service Family Plan" }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfe"), "name" : "Phone Service Basic Plan" }
+
+
+
+
+db.products.find({type: {$ne : null}}, {name: 1, price: 1})
+
+{ "_id" : "ac7", "name" : "AC7 Phone", "price" : 320 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfa"), "name" : "AC3 Case Green", "price" : 12 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfb"), "name" : "Phone Extended Warranty", "price" : 38 }
+{ "_id" : "ac3", "name" : "AC3 Phone", "price" : 200 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bf9"), "name" : "AC3 Series Charger", "price" : 19 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfd"), "name" : "AC3 Case Red", "price" : 12 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfc"), "name" : "AC3 Case Black", "price" : 12.5 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bff"), "name" : "Phone Service Core Plan" }
+{ "_id" : ObjectId("507d95d5719dbef170f15c00"), "name" : "Phone Service Family Plan" }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfe"), "name" : "Phone Service Basic Plan" }
+{ "_id" : ObjectId("507d95d5719dbef170f15c01"), "name" : "Cable TV Basic Service Package" }
+
+
+
+db.products.find({type: {$all : ['accessory', 'case']}}, {name: 1, price: 1})
+
+{ "_id" : ObjectId("507d95d5719dbef170f15bfa"), "name" : "AC3 Case Green", "price" : 12 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfd"), "name" : "AC3 Case Red", "price" : 12 }
+{ "_id" : ObjectId("507d95d5719dbef170f15bfc"), "name" : "AC3 Case Black", "price" : 12.5 }
+
+
+
+
+
+
+
+
+
+
