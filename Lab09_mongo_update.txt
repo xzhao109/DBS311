@@ -1,0 +1,42 @@
+mongoimport --db college --collection students --file ~/VSCode109/DBS311/Labs/dataset/students.json
+
+
+
+mongo
+show dbs
+use college
+db.students.find().forEach(printjson)
+exit
+
+
+
+
+
+
+
+
+
+
+
+
+
+db.students.updateMany({}, {$set : {"program" : "BTD", "term" : 3}})
+// db.students.find({}, {program : 1, term : 1, _id : 0})
+
+db.students.updateMany({"program" : "BTD"}, {$set : {"program" : "CPA"}})
+// db.students.find({}, {program : 1, _id : 0})
+
+db.students.update({"name" : "Jonie Raby"}, {$set : {"program" : "CPD"}})
+// db.students.find({"name" : "Jonie Raby"})
+
+
+db.students.updateMany({"_id": {$in : [20, 22, 24]}}, {$inc : {"term" : 2}})
+// db.students.find({}, {term : 1})
+
+
+db.students.updateMany({"term" : 3}, {$unset : {"term" : 1}})
+// db.students.find({}, {term : 1})
+
+
+
+
